@@ -7,3 +7,16 @@ before_install:
 
 script:
   - docker run hitbear/docker-react yarn test --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: 'ca-central-1'
+  app: 'docker-react'
+  env: 'DockerReact-env'
+  bucket-name: 'elasticbeanstalk-ca-central-1-250175909064'
+  bucket-path: 'docker-react'
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: '$AWS_SECRET_KEY'
